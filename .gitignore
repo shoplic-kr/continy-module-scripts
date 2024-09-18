@@ -3,8 +3,10 @@
 .vscode
 .env.*
 
+node_modules/
+
+*.tsbuildinfo
 *.cache
 
-/tests/wp-test-core/
-/tests/wp-test-lib/
+/tests/wp-test-*/
 /vendor/

@@ -3,7 +3,6 @@
 namespace ShoplicKr\Continy\ViteScripts\Enqueue;
 
 use ShoplicKr\Continy\ViteScripts\Modules\Scripts;
-use function Shoplic\MedicalObserver\Helpers\getThemeBaseUrl;
 
 class EnqueuedScript
 {
@@ -40,16 +39,17 @@ class EnqueuedScript
         $handle = $this->module->getPrefix() . $this->handle;
         $url    = $this->module->getDevServerUrl() . $this->module->getSrcRoot() . $this->handle;
         $deps   = [
-            'wp-ii18n',
-            $this->module->getPrefix() . 'dev-vite-client',
+            'wp-i18n',
+            $this->module->getPrefix() . '@vite/client',
             ...$this->deps,
         ];
         $args   = [
             'in_footer' => true,
-            'strategy'  => 'async',
+            'strategy'  => 'defer',
             ...$this->args,
         ];
 
+        $this->module->addHandle($handle);
         wp_enqueue_script($handle, $url, $deps, null, $args);
         wp_add_inline_script($handle, "console.info('$handle is running in development mode.')");
     }
@@ -58,8 +58,8 @@ class EnqueuedScript
     {
         $manifest = $this->module->getManifest();
         $handle   = $this->module->getPrefix() . $this->handle;
-        $key      = $this->module->getSrcRoot() . $handle;
-        $isEntry  = $this->manifest[$key]['isEntry'] ?? false;
+        $key      = $this->module->getSrcRoot() . $this->handle;
+        $isEntry  = $manifest[$key]['isEntry'] ?? false;
         $src      = $isEntry ? $manifest[$key]['file'] : '';
         $cssItems = $isEntry && isset($manifest[$key]['css']) ? $manifest[$key]['css'] : [];
 
@@ -68,7 +68,7 @@ class EnqueuedScript
             $deps = $this->deps;
             $args = [
                 'in_footer' => true,
-                'strategy'  => 'async',
+                'strategy'  => 'defer',
                 ...$this->args,
             ];
             wp_enqueue_script($handle, $url, $deps, null, $args);

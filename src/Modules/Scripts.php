@@ -83,13 +83,13 @@ class Scripts implements Module
         );
 
         $this->basePath      = $args['basePath'];
-        $this->baseUrl       = untrailingslashit($args['baseUrl']);
+        $this->baseUrl       = trailingslashit($args['baseUrl']);
         $this->buildRoot     = trailingslashit($args['buildRoot']);
         $this->devServerPort = (int)$args['devServerPort'];
         $this->handles       = [];
         $this->isDevMode     = (bool)$args['isDevMode'];
         $this->prefix        = $args['prefix'];
-        $this->srcRoot       = trailingslashit($args['src']);
+        $this->srcRoot       = trailingslashit($args['srcRoot']);
 
         $this->loadManifest();
         $this->registerViteDevScripts();
@@ -230,12 +230,12 @@ class Scripts implements Module
         }
 
         // dev-refresh
-        $version = time();
+        $version = null;
         $args    = ['in_footer' => true, 'strategy' => 'defer'];
 
         // dev-refresh.js
-        $refresh = $this->getPrefix() . 'dev-refresh';
-        $url     = $this->getBaseUrl() . $this->getSrcRoot() . '/dev-refresh.js';
+        $refresh = $this->getPrefix() . 'vite/refresh';
+        $url     = $this->getBaseUrl() . $this->getSrcRoot() . 'refresh.js';
         $deps    = [];
 
         if (!wp_script_is($refresh, 'registered')) {
@@ -244,7 +244,7 @@ class Scripts implements Module
         }
 
         // @vite/client
-        $client = $this->getPrefix() . 'dev-@vite/client';
+        $client = $this->getPrefix() . '@vite/client';
         $url    = $this->getDevServerUrl() . '@vite/client';
         $deps   = [$refresh];
 
