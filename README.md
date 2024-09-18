@@ -1,2 +1,3 @@
-# continy-module-scripts
-Continy's scripts module
+# continy-module-vite-scripts
+
+Continy VITE scripts module
