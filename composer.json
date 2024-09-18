@@ -1,0 +1,57 @@
+{
+    "name": "shoplic-kr/continy-module-scripts",
+    "description": "Continy scripts module",
+    "homepage": "https://github.com/shoplic-kr/continy-module-scripts",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "ShoplicKr\\Continy\\Module\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShoplicKr\\Continy\\Module\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "changwoo",
+            "email": "changwoo@shoplic.kr"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "shoplic-kr/interface": "^1.0"
+    },
+    "require-dev": {
+        "shoplic-kr/wp-tests": "^1.0",
+        "phpunit/phpunit": "^9",
+        "yoast/phpunit-polyfills": "^3.0"
+    },
+    "minimum-stability": "beta",
+    "version": "0.0.0",
+    "scripts": {
+        "wp-tests": [
+            "@wp-tests:setenv",
+            "vendor/bin/phpunit"
+        ],
+        "wp-tests:clean": [
+            "@wp-tests:setenv",
+            "rm -rf $WP_CORE_DIR $PWP_TESTS_DIR"
+        ],
+        "wp-tests:setenv": [
+            "@putenv WP_CORE_DIR=./tests/wp-test-core",
+            "@putenv WP_TESTS_DIR=./tests/wp-test-lib",
+            "@putenv WP_TESTS_PHPUNIT_POLYFILLS_PATH=./vendor/yoast/phpunit-polyfills",
+            "@putenv DB_HOST=localhost",
+            "@putenv DB_USER=wordpress_tests",
+            "@putenv DB_PASS=wordpress_tests",
+            "@putenv DB_NAME=wordpress_tests"
+        ],
+        "wp-tests:setup": [
+            "@wp-tests:setenv",
+            "@wp-tests:clean",
+            "bin/install-wp-tests.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST latest"
+        ]
+    }
+}
