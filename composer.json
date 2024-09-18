@@ -5,12 +5,12 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "ShoplicKr\\Continy\\Module\\": "src/"
+            "ShoplicKr\\Continy\\Modules\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ShoplicKr\\Continy\\Module\\Tests\\": "tests/"
+            "ShoplicKr\\Continy\\Modules\\Tests\\": "tests/"
         }
     },
     "authors": [
