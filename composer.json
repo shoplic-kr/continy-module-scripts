@@ -1,16 +1,16 @@
 {
-    "name": "shoplic-kr/continy-module-scripts",
-    "description": "Continy scripts module",
-    "homepage": "https://github.com/shoplic-kr/continy-module-scripts",
+    "name": "shoplic-kr/continy-module-vite-scripts",
+    "description": "Continy VITE scripts module",
+    "homepage": "https://github.com/shoplic-kr/continy-module-vite-scripts",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "ShoplicKr\\Continy\\Modules\\": "src/"
+            "ShoplicKr\\Continy\\ViteScripts\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ShoplicKr\\Continy\\Modules\\Tests\\": "tests/"
+            "ShoplicKr\\Continy\\ViteScripts\\Tests\\": "tests/"
         }
     },
     "authors": [
